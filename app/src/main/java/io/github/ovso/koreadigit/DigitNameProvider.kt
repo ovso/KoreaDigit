@@ -8,19 +8,22 @@ class DigitNameProvider {
     }
 
     fun toKoreaDigit(inputDigit: String) {
-        val sb = StringBuilder()
-        val divList = mutableListOf<String>()
-        inputDigit.reversed().forEachIndexed { index, c ->
-            sb.append(c)
-            if (sb.count() == 4) {
-                divList.add(sb.toString().reversed())
-                sb.clear()
-            }
+        val divList = getDivList(inputDigit)
+        val divNameList = getDivNameList(divList)
+        val text = getDigitString(divNameList)
+        listener?.invoke(text)
+    }
+
+    private fun getDigitString(divNameList: MutableList<String>): String {
+        val finalBuilder = StringBuilder()
+        divNameList.reverse()
+        divNameList.forEachIndexed { _, s ->
+            finalBuilder.append(s)
         }
-        divList.add(sb.toString().reversed())
-        sb.clear()
+        return finalBuilder.toString() + "원"
+    }
 
-
+    private fun getDivNameList(divList: MutableList<String>): MutableList<String> {
         val divNameList = mutableListOf<String>()
         divList.forEachIndexed { index, s ->
             if (index < digitSymbols.count())
@@ -33,13 +36,8 @@ class DigitNameProvider {
                 divNameList.add(s)
         }
 
-        val finalBuilder = StringBuilder()
-        divNameList.reverse()
-        divNameList.forEachIndexed { _, s ->
-            finalBuilder.append(s)
-        }
+        return divNameList
 
-        listener?.invoke("${finalBuilder}원")
     }
 
     private fun getDivList(text: String): MutableList<String> {
