@@ -2,16 +2,18 @@ package io.github.ovso.koreadigit
 
 class DigitNameProvider {
 
-    private var listener: ((String) -> Unit)? = null
-    fun setListener(l: ((String) -> Unit)? = null) {
+    private var listener: ((String?) -> Unit)? = null
+    fun setListener(l: ((String?) -> Unit)? = null) {
         listener = l
     }
 
     fun toKoreaDigit(inputDigit: String) {
-        val divList = getDivList(inputDigit)
-        val divNameList = getDivNameList(divList)
-        val text = getDigitString(divNameList)
-        listener?.invoke(text)
+        digitSymbols?.let {
+            val divList = getDivList(inputDigit)
+            val divNameList = getDivNameList(divList)
+            val text = getDigitString(divNameList)
+            listener?.invoke(text)
+        } ?: listener?.invoke(null)
     }
 
     private fun getDigitString(divNameList: MutableList<String>): String {
@@ -26,11 +28,11 @@ class DigitNameProvider {
     private fun getDivNameList(divList: MutableList<String>): MutableList<String> {
         val divNameList = mutableListOf<String>()
         divList.forEachIndexed { index, s ->
-            if (index < digitSymbols.count())
-                if (s.toInt() == 0 && index < digitSymbols.lastIndex) {
+            if (index < digitSymbols!!.count())
+                if (s.toInt() == 0 && index < digitSymbols!!.lastIndex) {
                     divNameList.add("")
                 } else {
-                    divNameList.add("$s${digitSymbols[index]}")
+                    divNameList.add("$s${digitSymbols!![index]}")
                 }
             else
                 divNameList.add(s)
@@ -55,7 +57,7 @@ class DigitNameProvider {
         return divList
     }
 
-    private val digitSymbols = mutableListOf(
+    var digitSymbols: MutableList<String>? = mutableListOf(
         "",
         "만",
         "억",

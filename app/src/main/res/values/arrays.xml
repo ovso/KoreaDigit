@@ -1,0 +1,22 @@
+<resources>
+    <string-array name="digits">
+        <item></item>
+        <item>만</item>
+        <item>억</item>
+        <item>조</item>
+        <item>경</item>
+        <item>해</item>
+        <item>자</item>
+        <item>양</item>
+        <item>구</item>
+        <item>간</item>
+        <item>정</item>
+        <item>재</item>
+        <item>극</item>
+        <item>항하사</item>
+        <item>아승기</item>
+        <item>나유타</item>
+        <item>불가사의</item>
+        <item>무량대수</item>
+    </string-array>
+</resources>

@@ -20,5 +20,13 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("io.github.ovso.koreadigit", appContext.packageName)
+        val digits = appContext.resources.getStringArray(R.array.digits)
+        DigitNameProvider().apply {
+            setListener {
+                assertTrue("12만3456원" == it)
+            }
+            digitSymbols = digits.toMutableList()
+            toKoreaDigit("123456")
+        }
     }
 }
