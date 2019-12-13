@@ -23,30 +23,36 @@ class ExampleUnitTest {
 
     @Test
     fun test() {
-        digitNameProvider?.setListener {
-            println(it)
-            assertTrue("1234567890111213141516무량대수1718불가사의1920나유타2122아승기2324항하사2526극2728재2930정3132간3334구3536양3738자3940해4142경4344조4546억4748만4950원" == it)
-
+        digitNameProvider?.apply {
+            setListener {
+                println(it)
+                assertTrue("1234567890111213141516무량대수1718불가사의1920나유타2122아승기2324항하사2526극2728재2930정3132간3334구3536양3738자3940해4142경4344조4546억4748만4950원" == it)
+            }
+            toKoreaDigit(TEST1)
         }
-        digitNameProvider?.toKoreaDigit(TEST1)
 
-        digitNameProvider?.setListener {
-            println(it)
-            assertTrue("1234560000000000000000무량대수원" == it)
-
+        digitNameProvider?.apply {
+            setListener {
+                println(it)
+                assertTrue("1234560000000000000000무량대수원" == it)
+            }
+            toKoreaDigit(TEST2)
         }
-        digitNameProvider?.toKoreaDigit(TEST2)
-        digitNameProvider?.setListener {
-            println(it)
-            assertTrue("12억3456만7890원" == it)
 
+        digitNameProvider?.apply {
+            setListener {
+                println(it)
+                assertTrue("12억3456만7890원" == it)
+            }
+            toKoreaDigit(TEST3)
         }
-        digitNameProvider?.toKoreaDigit(TEST3)
-        digitNameProvider?.setListener {
-            println(it)
-            assertTrue("12345678901112131무량대수4151불가사의6171나유타8192아승기0200항하사0728재2930정3132간3300구0738자3940해4142경4344조4546억4748만4950원" == it)
 
+        digitNameProvider?.apply {
+            setListener {
+                println(it)
+                assertTrue("12345678901112131무량대수4151불가사의6171나유타8192아승기0200항하사0728재2930정3132간3300구0738자3940해4142경4344조4546억4748만4950원" == it)
+            }
+            toKoreaDigit(TEST4)
         }
-        digitNameProvider?.toKoreaDigit(TEST4)
     }
 }
